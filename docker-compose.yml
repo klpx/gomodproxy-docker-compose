@@ -1,0 +1,14 @@
+services:
+  gomodproxy:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      args:
+        VERSION: v0.1.10
+    volumes:
+      - gomodcache:/gomodcache
+    command: /gomodproxy/gomodproxy -addr :8000 -dir /gomodcache/cache -gitdir /gomodcache/git
+    ports:
+      - 8000:8000
+volumes:
+  gomodcache:
